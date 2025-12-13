@@ -1,67 +1,68 @@
-# 📘 HỆ THỐNG QUẢN LÝ SINH VIÊN (STUDENT MANAGEMENT SYSTEM)
+# 📘 STUDENT MANAGEMENT SYSTEM (SMS)
 
-## 1. Giới thiệu
+## 1. Introduction
 
-Hệ thống Quản lý Sinh viên (Student Management System – SMS) là một phần mềm hỗ trợ nhà trường và giảng viên trong việc quản lý thông tin sinh viên một cách tập trung, chính xác và hiệu quả. Hệ thống giúp số hóa các nghiệp vụ quản lý, giảm thiểu sai sót so với quản lý thủ công và tiết kiệm thời gian cho người sử dụng.
+The Student Management System (SMS) is a software application designed to support schools and lecturers in managing student information in a centralized, accurate, and efficient manner. The system helps digitize management processes, minimize errors compared to manual methods, and save time for users.
 
-## 2. Mục tiêu của hệ thống
+## 2. System Objectives
 
-* Quản lý thông tin sinh viên một cách khoa học và bảo mật
-* Hỗ trợ theo dõi quá trình học tập của sinh viên
-* Tạo thuận lợi cho việc tra cứu, cập nhật và thống kê dữ liệu
-* Phục vụ công tác quản lý đào tạo trong nhà trường
+* Manage student information in a structured and secure way
+* Support tracking of students’ learning progress
+* Facilitate searching, updating, and statistical analysis of data
+* Serve academic and training management activities within the institution
 
-## 3. Các chức năng chính
+## 3. Main Features
 
-### 3.1 Quản lý sinh viên
+### 3.1 Student Management
 
-* Thêm, sửa, xóa thông tin sinh viên
-* Quản lý hồ sơ cá nhân (mã SV, họ tên, ngày sinh, lớp, khoa, …)
-* Tìm kiếm và lọc sinh viên theo nhiều tiêu chí
+* Add, edit, and delete student information
+* Manage personal profiles (student ID, full name, date of birth, class, faculty, etc.)
+* Search and filter students based on multiple criteria
 
-### 3.2 Quản lý lớp học
+### 3.2 Class Management
 
-* Tạo và quản lý danh sách lớp
-* Gán sinh viên vào lớp
-* Theo dõi số lượng sinh viên trong từng lớp
+* Create and manage class lists
+* Assign students to classes
+* Monitor the number of students in each class
 
-### 3.3 Quản lý môn học
+### 3.3 Course Management
 
-* Thêm, sửa, xóa môn học
-* Quản lý thông tin môn học (mã môn, tên môn, số tín chỉ)
+* Add, edit, and delete courses
+* Manage course information (course code, course name, credit units)
 
-### 3.4 Quản lý điểm
+### 3.4 Grade Management
 
-* Nhập và cập nhật điểm sinh viên
-* Tính điểm trung bình
-* Xem kết quả học tập theo từng học kỳ
+* Enter and update student grades
+* Calculate grade point averages (GPA)
+* View academic results by semester
 
-### 3.5 Báo cáo – Thống kê
+### 3.5 Reports and Statistics
 
-* Thống kê danh sách sinh viên
-* Báo cáo kết quả học tập
-* Xuất dữ liệu phục vụ quản lý
+* Generate student lists
+* Produce academic performance reports
+* Export data for management purposes
 
-## 4. Đối tượng sử dụng
+## 4. User Roles
 
-* **Quản trị viên**: Quản lý toàn bộ hệ thống
-* **Giảng viên**: Quản lý lớp, nhập và theo dõi điểm
-* **Sinh viên** (nếu có): Xem thông tin cá nhân và kết quả học tập
+* **Administrator**: Manages the entire system
+* **Lecturer**: Manages classes and enters/tracks grades
+* **Student** (if applicable): Views personal information and academic results
 
-## 5. Công nghệ sử dụng (ví dụ)
+## 5. Technologies Used (Example)
 
-* Ngôn ngữ lập trình: PHP
-* Cơ sở dữ liệu: MySQL
-* Giao diện: HTML, CSS, JavaScript
-* Kiến trúc: 3 lớp (Presentation – Business – Data Access)
+* Programming language: PHP
+* Database: MySQL
+* User Interface: HTML, CSS, JavaScript
+* Architecture: 3-tier architecture (Presentation – Business – Data Access)
 
-## 6. Hướng dẫn cài đặt (tóm tắt)
+## 6. Installation Guide (Summary)
 
-1. Cài đặt web server (XAMPP/WAMP)
-2. Import cơ sở dữ liệu vào MySQL
-3. Cấu hình kết nối CSDL trong hệ thống
-4. Chạy ứng dụng trên trình duyệt
+1. Install a web server (XAMPP/WAMP)
+2. Import the database into MySQL
+3. Configure the database connection in the system
+4. Run the application in a web browser
 
-## 7. Kết luận
+## 7. Conclusion
 
-Hệ thống Quản lý Sinh viên là công cụ hỗ trợ đắc lực cho công tác quản lý đào tạo, góp phần nâng cao hiệu quả làm việc và hiện đại hóa hoạt động quản lý trong nhà trường.
+The Student Management System is an effective tool that supports academic administration, improves work efficiency, and contributes to the modernization of management activities in educational institutions.
+
