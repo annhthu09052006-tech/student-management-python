@@ -11,3 +11,8 @@ class Student:
         print(f"Tuổi: {self.age}")
         print(f"Ngành: {self.major}")
         print("-------------------------")
+    
+
+
+
+    
