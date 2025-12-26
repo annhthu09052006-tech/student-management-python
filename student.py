@@ -7,8 +7,8 @@ students = []
 def add_student():
     print("\n--- Thêm sinh viên mới ---")
     name = input("Nhập họ tên sinh viên: ").strip()
-    age = input("Nhập tuổi: ").strip()
-    score = input("Nhập điểm trung bình: ").strip()
+    age = int(input("Nhập tuổi: ")).strip()
+    score = float(input("Nhập điểm trung bình: ")).strip()
 
     student = {
         "name": name,
@@ -72,3 +72,17 @@ def load_students_from_file():
             students.extend(data)
         except json.JSONDecodeError:
             students.clear()
+
+def save_students_to_file():
+    if not students:
+        print("\nDanh sách trống, không có dữ liệu để lưu!")
+        return
+
+    try:
+        with open("students.json", "w", encoding="utf-8") as f:
+            # indent=4 giúp file JSON dễ đọc hơn
+            # ensure_ascii=False để lưu được tiếng Việt có dấu
+            json.dump(students, f, ensure_ascii=False, indent=4)
+        print("\n✓ Lưu dữ liệu thành công vào file 'students.json'!")
+    except Exception as e:
+        print(f"\n✘ Có lỗi xảy ra khi lưu file: {e}")
