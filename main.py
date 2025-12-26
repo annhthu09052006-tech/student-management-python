@@ -12,6 +12,9 @@ def main():
 
         elif choice == "2":
             view_students()
+        elif choice == "6":
+            sort_students()
+
 
         elif choice == "0":
             print("\nCảm ơn bạn đã sử dụng chương trình. Tạm biệt!")
