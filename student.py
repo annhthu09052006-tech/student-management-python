@@ -1,3 +1,6 @@
+import json
+import os
+
 students = []
 
 # 1. Thêm sinh viên
@@ -53,3 +56,24 @@ def sort_students():
 
     # Hiển thị lại danh sách sau khi sắp xếp
     view_students()
+
+def load_students_from_file():
+    global students
+    filename = "students.json"
+
+    # Nếu file không tồn tại → danh sách rỗng
+    if not os.path.exists(filename):
+        students = []
+        return
+
+    # Nếu file tồn tại nhưng trống
+    if os.path.getsize(filename) == 0:
+        students = []
+        return
+
+    try:
+        with open(filename, "r", encoding="utf-8") as f:
+            students = json.load(f)
+    except json.JSONDecodeError:
+        # File lỗi định dạng
+        students = []
