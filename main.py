@@ -1,5 +1,5 @@
 from Menu import show_menu
-from student import add_student, view_students
+from student import add_student, view_students, sort_students
 
 def main():
     while True:
