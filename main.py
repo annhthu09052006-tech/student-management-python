@@ -1,7 +1,10 @@
 from Menu import show_menu
 from student import add_student, view_students, sort_students
+from student import load_students_from_file
 
 def main():
+    load_students_from_file()
+
     while True:
         show_menu()
 
