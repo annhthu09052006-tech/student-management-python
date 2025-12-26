@@ -26,3 +26,30 @@ def view_students():
     print("-" * 50)
     for i, sv in enumerate(students, 1):
         print(f"{i:<5} {sv['name']:<20} {sv['age']:<10} {sv['score']:<10}")
+
+# 6. Sắp xếp sinh viên
+def sort_students():
+    if not students:
+        print("\nDanh sách sinh viên đang trống!")
+        return
+
+    print("\n--- Sắp xếp sinh viên ---")
+    print("1. Sắp xếp theo tên (A → Z)")
+    print("2. Sắp xếp theo điểm (tăng dần)")
+
+    choice = input("Chọn kiểu sắp xếp (1-2): ").strip()
+
+    if choice == "1":
+        students.sort(key=lambda sv: sv["name"].lower())
+        print("\n✓ Đã sắp xếp theo tên tăng dần!")
+
+    elif choice == "2":
+        students.sort(key=lambda sv: float(sv["score"]))
+        print("\n✓ Đã sắp xếp theo điểm tăng dần!")
+
+    else:
+        print("\nLựa chọn không hợp lệ!")
+        return
+
+    # Hiển thị lại danh sách sau khi sắp xếp
+    view_students()
