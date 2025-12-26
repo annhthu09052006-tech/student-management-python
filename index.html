@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>US02 - Thêm Sinh Viên</title>
+    <title>Thêm Sinh Viên</title>
     <style>
         body { font-family: Arial, sans-serif; background: #f0f4f8; padding: 20px; margin: 0; }
         .container { max-width: 900px; margin: 40px auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
@@ -23,7 +23,7 @@
 </head>
 <body>
     <div class="container">
-        <h2>US02 - Thêm Sinh Viên</h2>
+        <h2>Thêm Sinh Viên</h2>
 
         <form id="studentForm">
             <label for="name">Tên sinh viên</label>
@@ -58,5 +58,16 @@
             </tbody>
         </table>
     </div>
+    <script>
+        document.getElementById('studentForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Ngăn reload trang
+            const name = document.getElementById('name').value;
+            const age = document.getElementById('age').value;
+            const id = document.getElementById('id').value;
+            const score = document.getElementById('score').value;
+
+            alert(`Đã nhận dữ liệu:\nTên: ${name}\nTuổi: ${age}\nID: ${id}\nĐiểm: ${score}`);
+        });
+    </script>
 </body>
 </html>
