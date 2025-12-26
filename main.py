@@ -1,4 +1,4 @@
-print("=== DANG CHAY MAIN.PY MOI ===")
+
 from menu import show_menu
 from student import add_student, view_students, sort_students
 from student import load_students_from_file
