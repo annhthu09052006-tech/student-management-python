@@ -55,34 +55,33 @@
         </table>
     </div>
    <script>
-        // Commit 2: Form hoạt động - người dùng có thể nhập dữ liệu
-        const form = document.getElementById('studentForm');
+    const form = document.getElementById('studentForm');
 
-        form.addEventListener('submit', function(e) {
-            e.preventDefault(); // Ngăn trang reload
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
 
-            // Lấy dữ liệu từ các ô nhập
-            const name = document.getElementById('name').value.trim();
-            const age = document.getElementById('age').value;
-            const id = document.getElementById('id').value.trim();
-            const score = document.getElementById('score').value;
+        const name = document.getElementById('name').value.trim();
+        const age = parseInt(document.getElementById('age').value);
+        const id = document.getElementById('id').value.trim();
+        const score = parseFloat(document.getElementById('score').value);
 
-            // Kiểm tra xem có nhập gì chưa (chỉ kiểm tra trống, chưa validate số)
-            if (name === '' || age === '' || id === '' || score === '') {
-                alert('Vui lòng nhập đầy đủ tất cả các trường!');
-                return;
-            }
+        if (!name || !id || isNaN(age) || isNaN(score)) {
+            alert('Vui lòng nhập đầy đủ thông tin!');
+            return;
+        }
 
-            // Hiện thông báo dữ liệu đã nhận được
-            alert(`
-Đã nhận thông tin sinh viên:
+        if (age <= 0) {
+            alert('Lỗi: Tuổi phải lớn hơn 0!');
+            return;
+        }
 
-Tên: ${name}
-Tuổi: ${age}
-ID: ${id}
-Điểm: ${score}
-            `);
-        });
-    </script>
+        if (score < 0 || score > 10) {
+            alert('Lỗi: Điểm phải từ 0 đến 10!');
+            return;
+        }
+
+        alert('Dữ liệu hợp lệ! Đã sẵn sàng thêm sinh viên.');
+    });
+</script>
 </body>
 </html>
