@@ -54,5 +54,50 @@
             <tbody></tbody>
         </table>
     </div>
+    <script>
+    let students = [];
+
+    function renderTable() {
+        const tbody = document.querySelector('#studentTable tbody');
+        tbody.innerHTML = '';
+        students.forEach(student => {
+            const row = document.createElement('tr');
+            row.innerHTML = `<td>\( {student.id}</td><td> \){student.name}</td><td>\( {student.age}</td><td> \){student.score}</td>`;
+            tbody.appendChild(row);
+        });
+    }
+
+    document.getElementById('studentForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const name = document.getElementById('name').value.trim();
+        const age = parseInt(document.getElementById('age').value);
+        const id = document.getElementById('id').value.trim();
+        const score = parseFloat(document.getElementById('score').value);
+
+        if (age <= 0) {
+            alert('Tuổi phải lớn hơn 0!');
+            return;
+        }
+        if (score < 0 || score > 10) {
+            alert('Điểm phải từ 0 đến 10!');
+            return;
+        }
+        if (!name || !id) {
+            alert('Vui lòng nhập đầy đủ tên và ID!');
+            return;
+        }
+
+        // Thêm sinh viên vào danh sách
+        students.push({ id, name, age, score });
+        renderTable();
+
+        this.reset();
+        alert('Thêm sinh viên thành công!');
+    });
+
+    // Hiển thị bảng trống lúc đầu
+    renderTable();
+</script>
 </body>
 </html>
