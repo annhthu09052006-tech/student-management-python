@@ -46,7 +46,7 @@
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Tên</th>
+                    <th>Họ tên</th>
                     <th>Tuổi</th>
                     <th>Điểm</th>
                 </tr>
@@ -55,18 +55,26 @@
         </table>
     </div>
    <script>
+    // US03 - Commit 1: Hiển thị tất cả sinh viên theo dạng bảng với cột ID - Họ tên - Tuổi - Điểm
     let students = JSON.parse(localStorage.getItem('students')) || [];
 
     function renderTable() {
         const tbody = document.querySelector('#studentTable tbody');
-        tbody.innerHTML = '';
+        tbody.innerHTML = ''; // Xóa hết dòng cũ
+
         students.forEach(student => {
             const row = document.createElement('tr');
-            row.innerHTML = `<td>\( {student.id}</td><td> \){student.name}</td><td>\( {student.age}</td><td> \){student.score}</td>`;
+            row.innerHTML = `
+                <td>${student.id}</td>
+                <td>${student.name}</td>   <!-- Họ tên -->
+                <td>${student.age}</td>
+                <td>${student.score}</td>
+            `;
             tbody.appendChild(row);
         });
     }
 
+    // Giữ nguyên các hàm cũ từ US02 (submit form, save, download...)
     function saveToStorage() {
         localStorage.setItem('students', JSON.stringify(students));
     }
@@ -91,18 +99,31 @@
         const id = document.getElementById('id').value.trim();
         const score = parseFloat(document.getElementById('score').value);
 
-        if (!name || !id || isNaN(age) || isNaN(score)) return alert('Nhập đầy đủ!');
-        if (age <= 0) return alert('Tuổi > 0!');
-        if (score < 0 || score > 10) return alert('Điểm 0-10!');
-        if (students.some(s => s.id === id)) return alert('ID đã tồn tại!');
+        if (!name || !id || isNaN(age) || isNaN(score)) {
+            alert('Vui lòng nhập đầy đủ!');
+            return;
+        }
+        if (age <= 0) {
+            alert('Tuổi phải lớn hơn 0!');
+            return;
+        }
+        if (score < 0 || score > 10) {
+            alert('Điểm phải từ 0 đến 10!');
+            return;
+        }
+        if (students.some(s => s.id === id)) {
+            alert('ID đã tồn tại!');
+            return;
+        }
 
         students.push({ id, name, age, score });
         saveToStorage();
-        renderTable();
+        renderTable(); // Cập nhật bảng ngay
         this.reset();
-        alert('Thêm thành công!');
+        alert('Thêm sinh viên thành công!');
     });
 
+    // Load và hiển thị danh sách ngay khi mở trang
     renderTable();
 </script>
 </body>
