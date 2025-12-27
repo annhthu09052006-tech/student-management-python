@@ -56,3 +56,18 @@ def register_account():
 
     save_accounts()
     print("✓ Tạo tài khoản thành công!")
+# ==============================
+# ĐĂNG NHẬP
+# ==============================
+def login():
+    print("\n--- Đăng nhập ---")
+    username = input("Tên đăng nhập: ").strip()
+    password = input("Mật khẩu: ").strip()
+
+    for acc in accounts:
+        if acc["username"] == username and acc["password"] == password:
+            print(f"\n✓ Đăng nhập thành công ({acc['role']})")
+            return acc
+
+    print("✘ Sai tên đăng nhập hoặc mật khẩu!")
+    return None
