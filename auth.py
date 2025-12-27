@@ -1,4 +1,4 @@
-from account import login
+from account import login, register_account
 
 current_user = None
 
