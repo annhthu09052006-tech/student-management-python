@@ -3,8 +3,10 @@ from Menu import show_menu
 from student import add_student, view_students, sort_students, save_students_to_file
 from student import load_students_from_file
 from student import edit_student_by_mssv
+from account import load_accounts, login, register_account
 def main():
     load_students_from_file()
+    load_accounts()
 
     while True:
         show_menu()
