@@ -6,10 +6,24 @@ def require_login():
     global current_user
 
     while current_user is None:
-        print("\n====== ĐĂNG NHẬP HỆ THỐNG ======")
-        current_user = login()
-        if current_user is None:
-            print("⚠ Vui lòng đăng nhập để tiếp tục!")
+        print("\n====== HỆ THỐNG ======")
+        print("1. Đăng nhập")
+        print("2. Đăng ký")
+        print("0. Thoát")
+
+        choice = input("Chọn: ").strip()
+
+        if choice == "1":
+            current_user = login()
+            if current_user is None:
+                print("⚠ Sai tài khoản hoặc mật khẩu!")
+        elif choice == "2":
+            register_account()
+        elif choice == "0":
+            print("👋 Tạm biệt!")
+            exit()
+        else:
+            print("Lựa chọn không hợp lệ!")
 
     return current_user
 
