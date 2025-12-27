@@ -1,5 +1,5 @@
 
-from menu import show_menu
+from Menu import show_menu
 from student import (
     add_student, view_students, sort_students,
     save_students_to_file, load_students_from_file,
