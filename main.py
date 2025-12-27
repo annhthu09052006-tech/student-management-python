@@ -8,6 +8,19 @@ def main():
     load_students_from_file()
     load_accounts()
 
+    user = None
+    while user is None:
+        print("\n1. Đăng nhập")
+        print("2. Đăng ký")
+        choice = input("Chọn: ").strip()
+
+        if choice == "1":
+            user = login()
+        elif choice == "2":
+            register_account()
+        else:
+            print("Lựa chọn không hợp lệ!")
+
     while True:
         show_menu()
         choice = input("Nhập lựa chọn của bạn (0-9): ").strip()
