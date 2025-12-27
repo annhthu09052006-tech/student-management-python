@@ -4,9 +4,13 @@ from student import add_student, view_students, sort_students, save_students_to_
 from student import load_students_from_file
 from student import edit_student_by_mssv
 from account import load_accounts, login, register_account
+from account import load_accounts, register_account
+from auth import require_login, is_teacher, is_student
 def main():
     load_students_from_file()
     load_accounts()
+    load_accounts()
+    user = require_login()
 
     user = None
     while user is None:
@@ -42,7 +46,26 @@ def main():
             break
         else:
             print("\nLựa chọn không hợp lệ! Vui lòng nhập số từ 0 đến 9.")
+        if choice == "1":
+            if is_teacher():
+                add_student()
+            else:
+                print("✘ Chỉ giảng viên mới được thêm sinh viên!")
 
+        elif choice == "2":
+            view_students()
+
+        elif choice == "3":
+            if is_teacher():
+                edit_student_by_mssv()
+            else:
+                print("✘ Chỉ giảng viên mới được sửa sinh viên!")
+
+        elif choice == "7":
+            if is_teacher():
+                save_students_to_file()
+            else:
+                print("✘ Sinh viên không được phép lưu file!")
 # Điểm bắt đầu chương trình
 if __name__ == "__main__":
     main()
