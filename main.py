@@ -54,6 +54,7 @@ def student_menu():
 def main():
     load_students_from_file()
     load_accounts()
+    user = require_login() 
 
     # 🔐 BẮT BUỘC ĐĂNG NHẬP
     user = require_login()
