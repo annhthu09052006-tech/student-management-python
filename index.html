@@ -55,8 +55,34 @@
         </table>
     </div>
    <script>
-    const form = document.getElementById('studentForm');
+    let students = JSON.parse(localStorage.getItem('students')) || [];
 
+    function renderTable() {
+        const tbody = document.querySelector('#studentTable tbody');
+        tbody.innerHTML = '';
+        students.forEach(student => {
+            const row = document.createElement('tr');
+            row.innerHTML = `<td>\( {student.id}</td><td> \){student.name}</td><td>\( {student.age}</td><td> \){student.score}</td>`;
+            tbody.appendChild(row);
+        });
+    }
+
+    function saveToStorage() {
+        localStorage.setItem('students', JSON.stringify(students));
+    }
+
+    document.getElementById('downloadBtn').addEventListener('click', () => {
+        const data = JSON.stringify(students, null, 2);
+        const blob = new Blob([data], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'students.json';
+        a.click();
+        URL.revokeObjectURL(url);
+    });
+
+    const form = document.getElementById('studentForm');
     form.addEventListener('submit', function(e) {
         e.preventDefault();
 
@@ -65,23 +91,19 @@
         const id = document.getElementById('id').value.trim();
         const score = parseFloat(document.getElementById('score').value);
 
-        if (!name || !id || isNaN(age) || isNaN(score)) {
-            alert('Vui lòng nhập đầy đủ thông tin!');
-            return;
-        }
+        if (!name || !id || isNaN(age) || isNaN(score)) return alert('Nhập đầy đủ!');
+        if (age <= 0) return alert('Tuổi > 0!');
+        if (score < 0 || score > 10) return alert('Điểm 0-10!');
+        if (students.some(s => s.id === id)) return alert('ID đã tồn tại!');
 
-        if (age <= 0) {
-            alert('Lỗi: Tuổi phải lớn hơn 0!');
-            return;
-        }
-
-        if (score < 0 || score > 10) {
-            alert('Lỗi: Điểm phải từ 0 đến 10!');
-            return;
-        }
-
-        alert('Dữ liệu hợp lệ! Đã sẵn sàng thêm sinh viên.');
+        students.push({ id, name, age, score });
+        saveToStorage();
+        renderTable();
+        this.reset();
+        alert('Thêm thành công!');
     });
+
+    renderTable();
 </script>
 </body>
 </html>
