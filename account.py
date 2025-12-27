@@ -18,3 +18,9 @@ def load_accounts():
             accounts = json.load(f)
     except json.JSONDecodeError:
         accounts = []
+# ==============================
+# LƯU TÀI KHOẢN VÀO FILE
+# ==============================
+def save_accounts():
+    with open(ACCOUNTS_FILE, "w", encoding="utf-8") as f:
+        json.dump(accounts, f, ensure_ascii=False, indent=4)
