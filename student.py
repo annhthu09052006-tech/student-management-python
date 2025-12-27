@@ -11,6 +11,7 @@ def add_student():
     score = float(input("Nhập điểm trung bình: ")).strip()
 
     student = {
+        "mssv": mssv,
         "name": name,
         "age": age,
         "score": score
@@ -86,3 +87,36 @@ def save_students_to_file():
         print("\n✓ Lưu dữ liệu thành công vào file 'students.json'!")
     except Exception as e:
         print(f"\n✘ Có lỗi xảy ra khi lưu file: {e}")
+def edit_student_by_mssv():
+    if not students:
+        print("\nDanh sách sinh viên đang trống!")
+        return
+
+    mssv = input("\nNhập MSSV sinh viên cần sửa: ").strip()
+
+    # Tìm sinh viên theo MSSV
+    for sv in students:
+        if sv.get("mssv") == mssv:
+            print("\n--- Thông tin hiện tại ---")
+            print(f"MSSV : {sv.get('mssv')}")
+            print(f"Họ tên : {sv.get('name')}")
+            print(f"Tuổi : {sv.get('age')}")
+            print(f"Điểm TB : {sv.get('score')}")
+
+            print("\n--- Nhập thông tin mới (Enter để giữ nguyên) ---")
+
+            new_name = input("Họ tên mới: ").strip()
+            new_age = input("Tuổi mới: ").strip()
+            new_score = input("Điểm TB mới: ").strip()
+
+            if new_name:
+                sv["name"] = new_name
+            if new_age:
+                sv["age"] = int(new_age)
+            if new_score:
+                sv["score"] = float(new_score)
+
+            print("\n✓ Cập nhật thông tin sinh viên thành công!")
+            return
+
+    print("\n✘ Không tìm thấy sinh viên với MSSV đã nhập!")

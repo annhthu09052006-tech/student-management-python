@@ -1,8 +1,8 @@
 
-from menu import show_menu
+from Menu import show_menu
 from student import add_student, view_students, sort_students, save_students_to_file
 from student import load_students_from_file
-
+from student import edit_student_by_mssv
 def main():
     load_students_from_file()
 
@@ -13,6 +13,8 @@ def main():
             add_student()
         elif choice == "2":
             view_students()
+        elif choice == "3":
+            edit_student_by_mssv()
         elif choice == "6":
             sort_students()
         elif choice == "7":
