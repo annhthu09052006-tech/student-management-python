@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>US02 - Thêm Sinh Viên</title>
+    <title> Thêm Sinh Viên</title>
     <style>
         body { font-family: Arial, sans-serif; background: #f0f4f8; padding: 20px; }
         .container { max-width: 900px; margin: auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
@@ -21,7 +21,7 @@
 </head>
 <body>
     <div class="container">
-        <h2>US02 - Thêm Sinh Viên</h2>
+        <h2> Thêm Sinh Viên</h2>
 
         <form id="studentForm">
             <label>Tên sinh viên</label>
@@ -54,50 +54,35 @@
             <tbody></tbody>
         </table>
     </div>
-    <script>
-    let students = [];
+   <script>
+        // Commit 2: Form hoạt động - người dùng có thể nhập dữ liệu
+        const form = document.getElementById('studentForm');
 
-    function renderTable() {
-        const tbody = document.querySelector('#studentTable tbody');
-        tbody.innerHTML = '';
-        students.forEach(student => {
-            const row = document.createElement('tr');
-            row.innerHTML = `<td>\( {student.id}</td><td> \){student.name}</td><td>\( {student.age}</td><td> \){student.score}</td>`;
-            tbody.appendChild(row);
+        form.addEventListener('submit', function(e) {
+            e.preventDefault(); // Ngăn trang reload
+
+            // Lấy dữ liệu từ các ô nhập
+            const name = document.getElementById('name').value.trim();
+            const age = document.getElementById('age').value;
+            const id = document.getElementById('id').value.trim();
+            const score = document.getElementById('score').value;
+
+            // Kiểm tra xem có nhập gì chưa (chỉ kiểm tra trống, chưa validate số)
+            if (name === '' || age === '' || id === '' || score === '') {
+                alert('Vui lòng nhập đầy đủ tất cả các trường!');
+                return;
+            }
+
+            // Hiện thông báo dữ liệu đã nhận được
+            alert(`
+Đã nhận thông tin sinh viên:
+
+Tên: ${name}
+Tuổi: ${age}
+ID: ${id}
+Điểm: ${score}
+            `);
         });
-    }
-
-    document.getElementById('studentForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-
-        const name = document.getElementById('name').value.trim();
-        const age = parseInt(document.getElementById('age').value);
-        const id = document.getElementById('id').value.trim();
-        const score = parseFloat(document.getElementById('score').value);
-
-        if (age <= 0) {
-            alert('Tuổi phải lớn hơn 0!');
-            return;
-        }
-        if (score < 0 || score > 10) {
-            alert('Điểm phải từ 0 đến 10!');
-            return;
-        }
-        if (!name || !id) {
-            alert('Vui lòng nhập đầy đủ tên và ID!');
-            return;
-        }
-
-        // Thêm sinh viên vào danh sách
-        students.push({ id, name, age, score });
-        renderTable();
-
-        this.reset();
-        alert('Thêm sinh viên thành công!');
-    });
-
-    // Hiển thị bảng trống lúc đầu
-    renderTable();
-</script>
+    </script>
 </body>
 </html>
