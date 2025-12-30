@@ -99,3 +99,7 @@ def xem_danh_sach_sinh_vien():
     
     print("-" * 65)
     print(f"👥 Tổng cộng: {len(students)} sinh viên\n")
+    print(f"{'STT':<4} {'ID':<12} {'Họ và tên':<25} {'Điểm':<8} {'Tuổi':<6}")
+    # ... giữ nguyên dòng gạch ngang
+    for i, sv in enumerate(students, 1):
+        print(f"{i:<4} {sv['id']:<12} {sv['name']:<25} {sv['score']:<8.1f} {sv['age']:<6}")
