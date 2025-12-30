@@ -88,9 +88,14 @@ def xem_danh_sach_sinh_vien():
     students = load_students()
     
     if not students:
-        print("Hiện tại chưa có sinh viên nào.")
+        print("📭 Hiện tại chưa có sinh viên nào trong danh sách.\n")
         return
     
-    for sv in students:
-        print(f"ID: {sv['id']} | Tên: {sv['name']} | Tuổi: {sv['age']} | Điểm: {sv['score']}")
-    print()
+    print(f"{'STT':<4} {'ID':<12} {'Họ và tên':<25} {'Điểm':<8} {'Tuổi':<6}")
+    print("-" * 65)
+    
+    for i, sv in enumerate(students, 1):
+        print(f"{i:<4} {sv['id']:<12} {sv['name']:<25} {sv['score']:<8.1f} {sv['age']:<6}")
+    
+    print("-" * 65)
+    print(f"👥 Tổng cộng: {len(students)} sinh viên\n")
