@@ -103,3 +103,25 @@ def xem_danh_sach_sinh_vien():
     # ... giữ nguyên dòng gạch ngang
     for i, sv in enumerate(students, 1):
         print(f"{i:<4} {sv['id']:<12} {sv['name']:<25} {sv['score']:<8.1f} {sv['age']:<6}")
+    def sua_thong_tin_sinh_vien():
+     print("\n=== SỬA THÔNG TIN SINH VIÊN ===\n")
+    students = load_students()
+    
+    if not students:
+        print("Danh sách sinh viên trống! Không có ai để sửa.")
+        return
+    
+    ma_sv = input("Nhập ID sinh viên cần sửa: ").strip()
+    
+    # Tìm sinh viên theo ID
+    sinh_vien_tim_thay = None
+    for sv in students:
+        if sv["id"] == ma_sv:
+            sinh_vien_tim_thay = sv
+            break
+    
+    if not sinh_vien_tim_thay:
+        print(f"Không tìm thấy sinh viên với ID: {ma_sv}")
+        return
+    
+    print(f"Thông tin hiện tại: {sinh_vien_tim_thay['name']} | Tuổi: {sinh_vien_tim_thay['age']} | Điểm: {sinh_vien_tim_thay['score']}")
