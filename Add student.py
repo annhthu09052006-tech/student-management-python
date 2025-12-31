@@ -174,3 +174,15 @@ def sua_thong_tin_sinh_vien():
     print(f"   Tên : {sinh_vien_tim_thay['name']}")
     print(f"   Tuổi: {sinh_vien_tim_thay['age']}")
     print(f"   Điểm: {sinh_vien_tim_thay['score']}\n")
+    # Xác nhận trước khi xóa
+    xac_nhan = input("Bạn có chắc chắn muốn xóa sinh viên này? (y/n): ").strip().lower()
+    if xac_nhan not in ["y", "yes", "có", "co"]:
+        print("Đã hủy thao tác xóa.\n")
+        return
+    
+    # Thực hiện xóa
+    students.pop(vi_tri)
+    save_students(students)
+    
+    print("\n✅ Xóa sinh viên thành công!")
+    print(f"   Sinh viên ID {ma_sv} đã bị xóa khỏi hệ thống.\n")
