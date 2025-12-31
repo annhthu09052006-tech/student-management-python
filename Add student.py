@@ -144,3 +144,33 @@ def sua_thong_tin_sinh_vien():
         
     except ValueError:
         print("❌ Lỗi: Dữ liệu nhập không hợp lệ (tuổi và điểm phải là số)! Không thay đổi gì.\n")
+
+    def xoa_sinh_vien():
+     print("\n=== XÓA SINH VIÊN ===\n")
+    students = load_students()
+    
+    if not students:
+        print("📭 Danh sách sinh viên trống! Không có ai để xóa.\n")
+        return
+    
+    ma_sv = input("Nhập ID sinh viên cần xóa: ").strip()
+    
+    # Tìm sinh viên theo ID
+    sinh_vien_tim_thay = None
+    vi_tri = -1
+    for i, sv in enumerate(students):
+        if sv["id"] == ma_sv:
+            sinh_vien_tim_thay = sv
+            vi_tri = i
+            break
+    
+    if sinh_vien_tim_thay is None:
+        print(f"❌ Không tìm thấy sinh viên với ID: {ma_sv}\n")
+        return
+    
+    # Hiển thị thông tin sinh viên sắp xóa
+    print(f"Tìm thấy sinh viên:")
+    print(f"   ID  : {sinh_vien_tim_thay['id']}")
+    print(f"   Tên : {sinh_vien_tim_thay['name']}")
+    print(f"   Tuổi: {sinh_vien_tim_thay['age']}")
+    print(f"   Điểm: {sinh_vien_tim_thay['score']}\n")
