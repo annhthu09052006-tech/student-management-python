@@ -83,32 +83,12 @@ def them_mot_sinh_vien():
                 exit()
             else:
                 print('Vui lòng nhập "y" (có) hoặc "n" (không).')
-def xem_danh_sach_sinh_vien():
-    print("\n=== DANH SÁCH SINH VIÊN ===\n")
+def sua_thong_tin_sinh_vien():
+    print("\n=== SỬA THÔNG TIN SINH VIÊN ===\n")
     students = load_students()
     
     if not students:
-        print("📭 Hiện tại chưa có sinh viên nào trong danh sách.\n")
-        return
-    
-    print(f"{'STT':<4} {'ID':<12} {'Họ và tên':<25} {'Điểm':<8} {'Tuổi':<6}")
-    print("-" * 65)
-    
-    for i, sv in enumerate(students, 1):
-        print(f"{i:<4} {sv['id']:<12} {sv['name']:<25} {sv['score']:<8.1f} {sv['age']:<6}")
-    
-    print("-" * 65)
-    print(f"👥 Tổng cộng: {len(students)} sinh viên\n")
-    print(f"{'STT':<4} {'ID':<12} {'Họ và tên':<25} {'Điểm':<8} {'Tuổi':<6}")
-    # ... giữ nguyên dòng gạch ngang
-    for i, sv in enumerate(students, 1):
-        print(f"{i:<4} {sv['id']:<12} {sv['name']:<25} {sv['score']:<8.1f} {sv['age']:<6}")
-    def sua_thong_tin_sinh_vien():
-     print("\n=== SỬA THÔNG TIN SINH VIÊN ===\n")
-    students = load_students()
-    
-    if not students:
-        print("Danh sách sinh viên trống! Không có ai để sửa.")
+        print("📭 Danh sách sinh viên trống! Không có ai để sửa.\n")
         return
     
     ma_sv = input("Nhập ID sinh viên cần sửa: ").strip()
@@ -121,7 +101,46 @@ def xem_danh_sach_sinh_vien():
             break
     
     if not sinh_vien_tim_thay:
-        print(f"Không tìm thấy sinh viên với ID: {ma_sv}")
+        print(f"❌ Không tìm thấy sinh viên với ID: {ma_sv}\n")
         return
     
-    print(f"Thông tin hiện tại: {sinh_vien_tim_thay['name']} | Tuổi: {sinh_vien_tim_thay['age']} | Điểm: {sinh_vien_tim_thay['score']}")
+    # Hiển thị thông tin hiện tại (chỉ in 1 lần, sạch sẽ)
+    print(f"Thông tin hiện tại:")
+    print(f"   Tên : {sinh_vien_tim_thay['name']}")
+    print(f"   Tuổi: {sinh_vien_tim_thay['age']}")
+    print(f"   Điểm: {sinh_vien_tim_thay['score']}\n")
+    
+    # Nhập thông tin mới (Enter để giữ nguyên)
+    try:
+        ten_moi = input(f"Tên mới (Enter để giữ '{sinh_vien_tim_thay['name']}'): ").strip()
+        if ten_moi:
+            sinh_vien_tim_thay["name"] = ten_moi
+        
+        tuoi_input = input(f"Tuổi mới (Enter để giữ {sinh_vien_tim_thay['age']}): ").strip()
+        if tuoi_input:
+            tuoi_moi = int(tuoi_input)
+            if tuoi_moi <= 0:
+                print("❌ Lỗi: Tuổi phải lớn hơn 0! Giữ nguyên tuổi cũ.")
+            else:
+                sinh_vien_tim_thay["age"] = tuoi_moi
+        
+        diem_input = input(f"Điểm mới (Enter để giữ {sinh_vien_tim_thay['score']}): ").strip()
+        if diem_input:
+            diem_moi = float(diem_input)
+            if diem_moi < 0 or diem_moi > 10:
+                print("❌ Lỗi: Điểm phải từ 0 đến 10! Giữ nguyên điểm cũ.")
+            else:
+                sinh_vien_tim_thay["score"] = diem_moi
+        
+        # Lưu lại vào file JSON
+        save_students(students)
+        
+        # Thông báo thành công
+        print("\n✅ Cập nhật thông tin sinh viên thành công!")
+        print(f"   ID: {ma_sv}")
+        print(f"   Tên : {sinh_vien_tim_thay['name']}")
+        print(f"   Tuổi: {sinh_vien_tim_thay['age']}")
+        print(f"   Điểm: {sinh_vien_tim_thay['score']}\n")
+        
+    except ValueError:
+        print("❌ Lỗi: Dữ liệu nhập không hợp lệ (tuổi và điểm phải là số)! Không thay đổi gì.\n")
