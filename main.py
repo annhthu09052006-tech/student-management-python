@@ -3,8 +3,10 @@ from Menu import show_menu
 from student import (
     add_student, view_students, sort_students,
     save_students_to_file, load_students_from_file,
-    edit_student_by_mssv
+    edit_student_by_mssv, view_my_info, view_my_score,
+    view_my_schedule, view_my_exam
 )
+from account import change_password
 from account import load_accounts
 from auth import require_login, is_teacher, is_student, logout
 
@@ -35,22 +37,6 @@ def teacher_menu():
             print("Lựa chọn không hợp lệ!")
 
 
-def student_menu():
-    while True:
-        print("\n===== MENU SINH VIÊN =====")
-        print("1. Xem danh sách sinh viên")
-        print("0. Đăng xuất")
-
-        choice = input("Chọn: ").strip()
-
-        if choice == "1":
-            view_students()
-        elif choice == "0":
-            logout()
-            print("Tạm biệt sinh viên!")
-            break
-        else:
-            print("Lựa chọn không hợp lệ!")
 
 
 def main():
