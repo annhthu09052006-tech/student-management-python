@@ -27,3 +27,12 @@ for student in students:
 print("\nKết quả tìm kiếm:")
 for student in matching_students:
     print(f"{student['id']}. {student['name']} - Lớp: {student['class']}")
+   
+matching_students = []
+for student in students:
+    if search_name.lower() in student['name'].lower():
+        matching_students.append(student)
+
+print("\nKết quả tìm kiếm:")
+for student in matching_students:
+    print(f"{student['id']}. {student['name']} - Lớp: {student['class']}")
