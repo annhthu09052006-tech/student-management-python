@@ -184,31 +184,54 @@ def get_current_student():
             return sv
     return None
 
-def view_my_info():
-    sv = get_current_student()
+def view_student_info(mssv):
+    sv = find_student_by_mssv(mssv)
     if not sv:
-        print("❌ Không tìm thấy thông tin sinh viên!")
+        print("❌ Không tìm thấy sinh viên!")
         return
 
-    print("\n--- THÔNG TIN CÁ NHÂN ---")
+    print("\n--- THÔNG TIN SINH VIÊN ---")
     print(f"MSSV   : {sv.get('mssv')}")
     print(f"Họ tên : {sv.get('name')}")
     print(f"Tuổi   : {sv.get('age')}")
+    input("\nNhấn Enter để quay lại menu...")
 
-def view_my_score():
-    sv = get_current_student()
+
+def view_student_score(mssv):
+    sv = find_student_by_mssv(mssv)
     if not sv:
-        print("❌ Không tìm thấy thông tin sinh viên!")
+        print("❌ Không tìm thấy sinh viên!")
         return
 
-    print(f"\n🎓 Điểm trung bình của bạn: {sv.get('score', 'N/A')}")
+    print(f"\n🎓 Điểm trung bình của bạn: {sv.get('score','N/A')}")
+    input("\nNhấn Enter để quay lại menu...")
 
-def view_my_schedule():
-    sv = get_current_student()
+def view_student_schedule(mssv):
+    sv = find_student_by_mssv(mssv)
+    if not sv:
+        print("❌ Không tìm thấy sinh viên!")
+        return
+
     print("\n📚 Lịch học:")
     print(sv.get("schedule", "Chưa có lịch học"))
+    input("\nNhấn Enter để quay lại menu...")
 
-def view_my_exam():
-    sv = get_current_student()
+
+
+def view_student_exam(mssv):
+    sv = find_student_by_mssv(mssv)
+    if not sv:
+        print("❌ Không tìm thấy sinh viên!")
+        return
+
     print("\n📝 Lịch thi:")
     print(sv.get("exam", "Chưa có lịch thi"))
+    input("\nNhấn Enter để quay lại menu...")
+
+
+
+def find_student_by_mssv(mssv):
+    for sv in students:
+        if sv.get("mssv") == mssv:
+            return sv
+    return None
