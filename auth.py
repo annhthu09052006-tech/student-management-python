@@ -34,3 +34,6 @@ def is_teacher():
 
 def is_student():
     return current_user and current_user["role"] == "Sinh viên"
+def logout():
+    global current_user
+    current_user = None
