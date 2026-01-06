@@ -71,3 +71,17 @@ def login():
 
     print("✘ Sai tên đăng nhập hoặc mật khẩu!")
     return None
+def change_password():
+    if not current_user:
+        return
+
+    old_pass = input("Mật khẩu cũ: ").strip()
+    if old_pass != current_user["password"]:
+        print("❌ Mật khẩu cũ không đúng!")
+        return
+
+    new_pass = input("Mật khẩu mới: ").strip()
+    current_user["password"] = new_pass
+    save_accounts()
+    print("✓ Đổi mật khẩu thành công! Vui lòng đăng nhập lại.")
+    logout()
