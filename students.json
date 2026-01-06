@@ -28,5 +28,17 @@
         "name": "Nguyen Van Nam",
         "age": 18,
         "score": 8.0
+    },
+    {
+        "name": "Luu Thao Ngan",
+        "age": 19,
+        "score": 9.0,
+        "mssv": "444"
+    },
+    {
+        "mssv": "555",
+        "name": "Pham Nhat Vuong",
+        "age": 20,
+        "score": 9.0
     }
 ]
