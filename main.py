@@ -15,32 +15,44 @@ from auth import require_login, is_teacher, is_student, logout
 
 def teacher_menu():
     while True:
-        print("\n===== MENU GIẢNG VIÊN =====")
-        print("1. Thêm sinh viên")
-        print("2. Xem danh sách sinh viên")
-        print("3. Sửa thông tin sinh viên")
-        print("4. Thêm lịch học cho sinh viên")
-        print("5. Thêm lịch thi cho sinh viên")
-        print("0. Đăng xuất")
-
-        choice = input("Chọn: ").strip()
+        show_menu()
+        choice = input("Nhập lựa chọn của bạn: ").strip()
 
         if choice == "1":
             add_student()
+
         elif choice == "2":
             view_students()
+            input("\nNhấn Enter để quay lại menu...")
+
         elif choice == "3":
             edit_student_by_mssv()
-        elif choice == "4":
-            add_schedule_for_student()
-        elif choice == "5":
-            add_exam_for_student()
-        elif choice == "0":
-            print("Đăng xuất giảng viên!")
-            break
-        else:
-            print("Lựa chọn không hợp lệ!")
 
+        elif choice == "6":
+            sort_students()
+            input("\nNhấn Enter để quay lại menu...")
+
+        elif choice == "7":
+            save_students_to_file()
+            input("\nNhấn Enter để quay lại menu...")
+
+        elif choice == "8":
+            load_students_from_file()
+            print("✓ Đã tải dữ liệu từ file")
+            input("\nNhấn Enter để quay lại menu...")
+        elif choice == "10":
+            add_schedule_for_student()
+
+        elif choice == "11":
+            add_exam_for_student()
+
+        elif choice == "0":
+            logout()
+            print("👋 Tạm biệt giảng viên!")
+            break
+
+        else:
+            print("❌ Lựa chọn không hợp lệ!")
 
 def student_menu():
     global current_student_mssv
