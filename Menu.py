@@ -11,5 +11,7 @@ def show_menu():
     print("7. Lưu danh sách sinh viên vào file")
     print("8. Tải danh sách sinh viên từ file")
     print("9. Cập nhật thông tin sinh viên")
+    print("10. cập nhật lịch học cho sinh viên")
+    print("11. cập nhật lịch thi cho sinh viên")
     print("0. Thoát")
     print("=" * 40)
