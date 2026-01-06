@@ -56,14 +56,14 @@ def student_menu():
 def main():
     load_students_from_file()
     load_accounts()
-    user = require_login() 
- 
-    # 🎭 PHÂN GIAO DIỆN THEO VAI TRÒ
-    if is_teacher():
-        teacher_menu()
-    elif is_student():
-        student_menu()
 
+    while True:
+        user = require_login()   # luôn quay lại đăng nhập
+
+        if is_teacher():
+            teacher_menu()
+        elif is_student():
+            student_menu()
 
 if __name__ == "__main__":
     main()
