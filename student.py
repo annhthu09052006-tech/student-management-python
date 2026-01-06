@@ -242,18 +242,32 @@ def add_schedule_for_student():
 
     if not sv:
         print("❌ Không tìm thấy sinh viên!")
+        input("\nNhấn Enter để quay lại menu...")
         return
 
-    print(f"\nSinh viên: {sv.get('name')}")
-    schedule = input("Nhập lịch học mới: ").strip()
+    print(f"\nSinh viên: {sv.get('name', 'N/A')}")
+    print("--- Nhập lịch học ---")
 
-    if schedule:
-        sv["schedule"] = schedule
-        print("✅ Đã cập nhật lịch học!")
-    else:
-        print("⚠️ Lịch học không được để trống!")
+    day = input("Thứ (VD: Thứ 2): ").strip()
+    subject = input("Môn học: ").strip()
+    room = input("Phòng học: ").strip()
+    time = input("Thời gian (VD: 7h30 - 9h30): ").strip()
 
+    if not day or not subject or not room or not time:
+        print("⚠️ Không được bỏ trống thông tin!")
+        input("\nNhấn Enter để quay lại menu...")
+        return
+
+    sv["schedule"] = {
+        "day": day,
+        "subject": subject,
+        "room": room,
+        "time": time
+    }
+
+    print("✅ Đã thêm / cập nhật lịch học thành công!")
     input("\nNhấn Enter để quay lại menu...")
+
 
 def add_exam_for_student():
     mssv = input("Nhập MSSV sinh viên: ").strip()
@@ -261,15 +275,29 @@ def add_exam_for_student():
 
     if not sv:
         print("❌ Không tìm thấy sinh viên!")
+        input("\nNhấn Enter để quay lại menu...")
         return
 
-    print(f"\nSinh viên: {sv.get('name')}")
-    exam = input("Nhập lịch thi mới: ").strip()
+    print(f"\nSinh viên: {sv.get('name', 'N/A')}")
+    print("--- Nhập lịch thi ---")
 
-    if exam:
-        sv["exam"] = exam
-        print("✅ Đã cập nhật lịch thi!")
-    else:
-        print("⚠️ Lịch thi không được để trống!")
+    day = input("Thứ (VD: Thứ 6): ").strip()
+    subject = input("Môn thi: ").strip()
+    room = input("Phòng thi: ").strip()
+    time = input("Thời gian thi (VD: 13h30 - 15h30): ").strip()
 
+    if not day or not subject or not room or not time:
+        print("⚠️ Không được bỏ trống thông tin!")
+        input("\nNhấn Enter để quay lại menu...")
+        return
+
+    sv["exam"] = {
+        "day": day,
+        "subject": subject,
+        "room": room,
+        "time": time
+    }
+
+    print("✅ Đã thêm / cập nhật lịch thi thành công!")
     input("\nNhấn Enter để quay lại menu...")
+

@@ -3,7 +3,13 @@
         "name": "Nguyen Van A",
         "age": "20",
         "score": "8.5",
-        "mssv": "111"
+        "mssv": "111",
+        "schedule": {
+            "day": "Thứ 2",
+            "subject": "Toán",
+            "room": "A22",
+            "time": "7h30 - 9h30"
+        }
     },
     {
         "name": "Tran Thi B",
