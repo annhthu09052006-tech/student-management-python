@@ -235,3 +235,22 @@ def find_student_by_mssv(mssv):
         if sv.get("mssv") == mssv:
             return sv
     return None
+
+def add_schedule_for_student():
+    mssv = input("Nhập MSSV sinh viên: ").strip()
+    sv = find_student_by_mssv(mssv)
+
+    if not sv:
+        print("❌ Không tìm thấy sinh viên!")
+        return
+
+    print(f"\nSinh viên: {sv.get('name')}")
+    schedule = input("Nhập lịch học mới: ").strip()
+
+    if schedule:
+        sv["schedule"] = schedule
+        print("✅ Đã cập nhật lịch học!")
+    else:
+        print("⚠️ Lịch học không được để trống!")
+
+    input("\nNhấn Enter để quay lại menu...")
