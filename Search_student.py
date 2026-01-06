@@ -36,3 +36,12 @@ for student in students:
 print("\nKết quả tìm kiếm:")
 for student in matching_students:
     print(f"{student['id']}. {student['name']} - Lớp: {student['class']}")
+   
+print("\nKết quả tìm kiếm:")
+if not matching_students:
+    print(f'Không tìm thấy sinh viên nào có tên chứa "{search_name}"')
+else:
+    for student in matching_students:
+        print(f"{student['id']}. {student['name']} - Lớp: {student['class']}")
+
+print("\nCảm ơn bạn đã sử dụng chương trình!")
