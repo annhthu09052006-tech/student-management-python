@@ -1,5 +1,6 @@
 import json
 import os
+from auth import current_user
 
 students = []
 
@@ -172,3 +173,13 @@ def show_students_table():
             f"{sv.get('age','-'):<6} "
             f"{sv.get('score','-'):<8}"
         )
+
+def get_current_student():
+    if not current_user:
+        return None
+
+    mssv = current_user["username"]  # username = MSSV
+    for sv in students:
+        if sv.get("mssv") == mssv:
+            return sv
+    return None
