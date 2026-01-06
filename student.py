@@ -194,3 +194,11 @@ def view_my_info():
     print(f"MSSV   : {sv.get('mssv')}")
     print(f"Họ tên : {sv.get('name')}")
     print(f"Tuổi   : {sv.get('age')}")
+
+def view_my_score():
+    sv = get_current_student()
+    if not sv:
+        print("❌ Không tìm thấy thông tin sinh viên!")
+        return
+
+    print(f"\n🎓 Điểm trung bình của bạn: {sv.get('score', 'N/A')}")
