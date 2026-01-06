@@ -6,7 +6,7 @@ from student import (
     edit_student_by_mssv
 )
 from account import load_accounts
-from auth import require_login, is_teacher, is_student
+from auth import require_login, is_teacher, is_student, logout
 
 
 def teacher_menu():
@@ -28,6 +28,7 @@ def teacher_menu():
             load_students_from_file()
             print("✓ Đã tải dữ liệu từ file")
         elif choice == "0":
+            logout()
             print("Tạm biệt giảng viên!")
             break
         else:
@@ -45,6 +46,7 @@ def student_menu():
         if choice == "1":
             view_students()
         elif choice == "0":
+            logout()
             print("Tạm biệt sinh viên!")
             break
         else:
@@ -55,10 +57,7 @@ def main():
     load_students_from_file()
     load_accounts()
     user = require_login() 
-
-    # 🔐 BẮT BUỘC ĐĂNG NHẬP
-    user = require_login()
-
+ 
     # 🎭 PHÂN GIAO DIỆN THEO VAI TRÒ
     if is_teacher():
         teacher_menu()

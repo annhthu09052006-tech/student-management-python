@@ -6,9 +6,10 @@ students = []
 # 1. Thêm sinh viên
 def add_student():
     print("\n--- Thêm sinh viên mới ---")
+    mssv = input("Nhập MSSV: ").strip()
     name = input("Nhập họ tên sinh viên: ").strip()
-    age = int(input("Nhập tuổi: ")).strip()
-    score = float(input("Nhập điểm trung bình: ")).strip()
+    age = int(input("Nhập tuổi: ").strip())
+    score = float(input("Nhập điểm trung bình: ").strip())
 
     student = {
         "mssv": mssv,
@@ -26,10 +27,11 @@ def view_students():
         return
 
     print("\n--- Danh sách sinh viên ---")
-    print(f"{'STT':<5} {'Họ tên':<20} {'Tuổi':<10} {'Điểm TB':<10}")
+    print(f"{'STT':<5} {'MSSV':<10} {'Họ tên':<20} {'Tuổi':<6} {'Điểm TB':<8}")
     print("-" * 50)
+
     for i, sv in enumerate(students, 1):
-        print(f"{i:<5} {sv['name']:<20} {sv['age']:<10} {sv['score']:<10}")
+        print(f"{i:<5} {sv.get('mssv','N/A'):<10} {sv['name']:<20} {sv['age']:<6} {sv['score']:<8}")
 
 # 6. Sắp xếp sinh viên
 def sort_students():
