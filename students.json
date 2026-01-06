@@ -9,6 +9,12 @@
             "subject": "Toán",
             "room": "A22",
             "time": "7h30 - 9h30"
+        },
+        "exam": {
+            "day": "Thứ 6",
+            "subject": "CNPM",
+            "room": "TH22",
+            "time": "13h30 - 15h30"
         }
     },
     {
