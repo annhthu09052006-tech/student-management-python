@@ -7,20 +7,34 @@ students = []
 # 1. Thêm sinh viên
 def add_student():
     print("\n--- Thêm sinh viên mới ---")
-    mssv = input("Nhập MSSV: ").strip()
     name = input("Nhập họ tên sinh viên: ").strip()
-    age = int(input("Nhập tuổi: ").strip())
-    score = float(input("Nhập điểm trung bình: ").strip())
+
+    # Nhập tuổi (bắt lỗi)
+    while True:
+        age_input = input("Nhập tuổi: ").strip()
+        if age_input.isdigit():
+            age = int(age_input)
+            break
+        else:
+            print("⚠️ Tuổi phải là số nguyên và không được để trống!")
+
+    # Nhập điểm trung bình (bắt lỗi)
+    while True:
+        score_input = input("Nhập điểm trung bình: ").strip()
+        try:
+            score = float(score_input)
+            break
+        except ValueError:
+            print("⚠️ Điểm phải là số (ví dụ: 7.5)")
 
     student = {
-        "mssv": mssv,
         "name": name,
         "age": age,
         "score": score
     }
-    students.append(student)
-    print("✓ Đã thêm sinh viên thành công!")
 
+    students.append(student)
+    print("✅ Đã thêm sinh viên thành công!")
 # 2. Xem danh sách sinh viên
 def view_students():
     if not students:
