@@ -13,7 +13,17 @@ students = [
 print("=== TÌM KIẾM SINH VIÊN THEO TÊN ===")
 search_name = input("Nhập tên sinh viên cần tìm: ")
 
-# Tạm thời in toàn bộ danh sách (chưa lọc)
+
 print("\nDanh sách tất cả sinh viên:")
 for student in students:
+    print(f"{student['id']}. {student['name']} - Lớp: {student['class']}")
+
+
+matching_students = []
+for student in students:
+    if search_name in student['name']:
+        matching_students.append(student)
+
+print("\nKết quả tìm kiếm:")
+for student in matching_students:
     print(f"{student['id']}. {student['name']} - Lớp: {student['class']}")
