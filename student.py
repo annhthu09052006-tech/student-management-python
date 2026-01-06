@@ -207,3 +207,8 @@ def view_my_schedule():
     sv = get_current_student()
     print("\n📚 Lịch học:")
     print(sv.get("schedule", "Chưa có lịch học"))
+
+def view_my_exam():
+    sv = get_current_student()
+    print("\n📝 Lịch thi:")
+    print(sv.get("exam", "Chưa có lịch thi"))
