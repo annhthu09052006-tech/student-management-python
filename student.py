@@ -24,14 +24,24 @@ def add_student():
 def view_students():
     if not students:
         print("\nDanh sách sinh viên đang trống!")
+        input("Nhấn Enter để quay lại menu...")
         return
 
-    print("\n--- Danh sách sinh viên ---")
-    print(f"{'STT':<5} {'MSSV':<10} {'Họ tên':<20} {'Tuổi':<6} {'Điểm TB':<8}")
-    print("-" * 50)
+    while True:
+        print("\n--- DANH SÁCH SINH VIÊN ---")
+        print(f"{'STT':<5} {'MSSV':<10} {'Họ tên':<20} {'Tuổi':<6} {'Điểm TB':<8}")
+        print("-" * 55)
 
-    for i, sv in enumerate(students, 1):
-        print(f"{i:<5} {sv.get('mssv','N/A'):<10} {sv['name']:<20} {sv['age']:<6} {sv['score']:<8}")
+        for i, sv in enumerate(students, 1):
+            print(f"{i:<5} {sv.get('mssv','N/A'):<10} {sv['name']:<20} {sv['age']:<6} {sv['score']:<8}")
+
+        print("\n0. Quay lại menu")
+        choice = input("Chọn: ").strip()
+
+        if choice == "0":
+            break
+        else:
+            print("⚠ Lựa chọn không hợp lệ, hãy bấm 0 để quay lại!")
 
 # 6. Sắp xếp sinh viên
 def sort_students():
