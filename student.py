@@ -183,3 +183,14 @@ def get_current_student():
         if sv.get("mssv") == mssv:
             return sv
     return None
+
+def view_my_info():
+    sv = get_current_student()
+    if not sv:
+        print("❌ Không tìm thấy thông tin sinh viên!")
+        return
+
+    print("\n--- THÔNG TIN CÁ NHÂN ---")
+    print(f"MSSV   : {sv.get('mssv')}")
+    print(f"Họ tên : {sv.get('name')}")
+    print(f"Tuổi   : {sv.get('age')}")
