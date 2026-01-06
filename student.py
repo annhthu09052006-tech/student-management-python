@@ -202,3 +202,8 @@ def view_my_score():
         return
 
     print(f"\n🎓 Điểm trung bình của bạn: {sv.get('score', 'N/A')}")
+
+def view_my_schedule():
+    sv = get_current_student()
+    print("\n📚 Lịch học:")
+    print(sv.get("schedule", "Chưa có lịch học"))
