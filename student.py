@@ -254,3 +254,22 @@ def add_schedule_for_student():
         print("⚠️ Lịch học không được để trống!")
 
     input("\nNhấn Enter để quay lại menu...")
+
+def add_exam_for_student():
+    mssv = input("Nhập MSSV sinh viên: ").strip()
+    sv = find_student_by_mssv(mssv)
+
+    if not sv:
+        print("❌ Không tìm thấy sinh viên!")
+        return
+
+    print(f"\nSinh viên: {sv.get('name')}")
+    exam = input("Nhập lịch thi mới: ").strip()
+
+    if exam:
+        sv["exam"] = exam
+        print("✅ Đã cập nhật lịch thi!")
+    else:
+        print("⚠️ Lịch thi không được để trống!")
+
+    input("\nNhấn Enter để quay lại menu...")
