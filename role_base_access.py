@@ -1,7 +1,3 @@
-# main_with_role.py
-# File mới - Menu phân quyền + Lưu/Tải file sinh viên (US13 + yêu cầu mới)
-# Không sửa bất kỳ file cũ nào
-
 import os
 import csv
 from auth import login, current_user
