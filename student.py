@@ -99,36 +99,76 @@ def save_students_to_file():
         print("\n✓ Lưu dữ liệu thành công vào file 'students.json'!")
     except Exception as e:
         print(f"\n✘ Có lỗi xảy ra khi lưu file: {e}")
+
 def edit_student_by_mssv():
     if not students:
         print("\nDanh sách sinh viên đang trống!")
+        input("Nhấn Enter để quay lại menu...")
         return
 
-    mssv = input("\nNhập MSSV sinh viên cần sửa: ").strip()
+    # 🔥 BƯỚC 1: HIỆN BẢNG DANH SÁCH
+    show_students_table()
 
-    # Tìm sinh viên theo MSSV
-    for sv in students:
-        if sv.get("mssv") == mssv:
-            print("\n--- Thông tin hiện tại ---")
-            print(f"MSSV : {sv.get('mssv')}")
-            print(f"Họ tên : {sv.get('name')}")
-            print(f"Tuổi : {sv.get('age')}")
-            print(f"Điểm TB : {sv.get('score')}")
+    print("\n0. Quay lại menu")
+    choice = input("Nhập STT sinh viên cần sửa: ").strip()
 
-            print("\n--- Nhập thông tin mới (Enter để giữ nguyên) ---")
+    # 🔙 Quay lại menu
+    if choice == "0":
+        return
 
-            new_name = input("Họ tên mới: ").strip()
-            new_age = input("Tuổi mới: ").strip()
-            new_score = input("Điểm TB mới: ").strip()
+    # 🚨 Kiểm tra STT hợp lệ
+    if not choice.isdigit():
+        print("✘ STT không hợp lệ!")
+        input("Nhấn Enter để quay lại menu...")
+        return
 
-            if new_name:
-                sv["name"] = new_name
-            if new_age:
-                sv["age"] = int(new_age)
-            if new_score:
-                sv["score"] = float(new_score)
+    index = int(choice) - 1
 
-            print("\n✓ Cập nhật thông tin sinh viên thành công!")
-            return
+    if index < 0 or index >= len(students):
+        print("✘ STT không tồn tại!")
+        input("Nhấn Enter để quay lại menu...")
+        return
 
-    print("\n✘ Không tìm thấy sinh viên với MSSV đã nhập!")
+    # ✅ LẤY SINH VIÊN THEO STT (CHỖ BẠN HỎI)
+    sv = students[index]
+
+    # 🔎 Hiển thị thông tin hiện tại
+    print("\n--- THÔNG TIN HIỆN TẠI ---")
+    print(f"MSSV   : {sv.get('mssv', 'N/A')}")
+    print(f"Họ tên : {sv.get('name', 'N/A')}")
+    print(f"Tuổi   : {sv.get('age', '-')}")
+    print(f"Điểm TB: {sv.get('score', '-')}")
+
+
+    print("\n--- Nhập thông tin mới (Enter để giữ nguyên) ---")
+    new_mssv = input("MSSV mới: ").strip()
+    new_name = input("Họ tên mới: ").strip()
+    new_age = input("Tuổi mới: ").strip()
+    new_score = input("Điểm TB mới: ").strip()
+
+    if new_name:
+        sv["name"] = new_name
+    if new_age:
+        sv["age"] = int(new_age)
+    if new_score:
+        sv["score"] = float(new_score)
+    if new_mssv:
+        sv["mssv"] = new_mssv
+
+
+    print("\n✓ Cập nhật thông tin sinh viên thành công!")
+    input("Nhấn Enter để quay lại menu...")
+
+def show_students_table():
+    print("\n--- DANH SÁCH SINH VIÊN ---")
+    print(f"{'STT':<5} {'MSSV':<10} {'Họ tên':<20} {'Tuổi':<6} {'Điểm TB':<8}")
+    print("-" * 55)
+
+    for i, sv in enumerate(students, 1):
+        print(
+            f"{i:<5} "
+            f"{sv.get('mssv','N/A'):<10} "
+            f"{sv.get('name','N/A'):<20} "
+            f"{sv.get('age','-'):<6} "
+            f"{sv.get('score','-'):<8}"
+        )
