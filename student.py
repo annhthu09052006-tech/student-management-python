@@ -181,10 +181,17 @@ def load_students_from_file():
         try:
             with open(FILE_NAME, "r", encoding="utf-8") as f:
                 students = json.load(f)
+                # Ép kiểu cho đúng
+                for sv in students:
+                    if 'age' in sv:
+                        sv['age'] = int(sv['age'])
+                    if 'score' in sv:
+                        sv['score'] = float(sv['score'])
         except json.JSONDecodeError:
             students = []
     else:
         students = []
+
 
 def save_students_to_file():
     with open(FILE_NAME, "w", encoding="utf-8") as f:
@@ -231,6 +238,7 @@ def add_schedule_for_student():
         "room": room,
         "time": time
     }
+    save_students_to_file()
 
     print("✅ Đã thêm / cập nhật lịch học thành công!")
     input("\nNhấn Enter để quay lại menu...")
