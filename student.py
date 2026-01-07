@@ -211,25 +211,34 @@ def get_current_student():
     return find_student_by_mssv(mssv)
 
 def add_schedule_for_student():
-    mssv = input("Nhập MSSV sinh viên: ").strip()
-    sv = find_student_by_mssv(mssv)
-
-    if not sv:
-        print("❌ Không tìm thấy sinh viên!")
-        input("\nNhấn Enter để quay lại menu...")
+    if not students:
+        print("\nDanh sách sinh viên đang trống!")
+        input("Nhấn Enter để quay lại menu...")
         return
 
-    print(f"\nSinh viên: {sv.get('name', 'N/A')}")
-    print("--- Nhập lịch học ---")
+    # 🔥 HIỆN BẢNG DANH SÁCH ĐỂ LỰA CHỌN
+    show_students_table()
+    
+    print("\n0. Quay lại menu")
+    choice = input("Chọn STT sinh viên cần thêm lịch học: ").strip()
+
+    if choice == "0": return
+    if not choice.isdigit() or int(choice) < 1 or int(choice) > len(students):
+        print("❌ Lựa chọn không hợp lệ!")
+        return
+
+    # Lấy sinh viên dựa trên STT
+    sv = students[int(choice) - 1]
+
+    print(f"\n--- Đang nhập lịch học cho: {sv.get('name')} (MSSV: {sv.get('mssv')}) ---")
 
     day = input("Thứ (VD: Thứ 2): ").strip()
     subject = input("Môn học: ").strip()
     room = input("Phòng học: ").strip()
     time = input("Thời gian (VD: 7h30 - 9h30): ").strip()
 
-    if not day or not subject or not room or not time:
+    if not (day and subject and room and time):
         print("⚠️ Không được bỏ trống thông tin!")
-        input("\nNhấn Enter để quay lại menu...")
         return
 
     sv["schedule"] = {
@@ -240,30 +249,39 @@ def add_schedule_for_student():
     }
     save_students_to_file()
 
-    print("✅ Đã thêm / cập nhật lịch học thành công!")
+    print("✅ Đã cập nhật lịch học thành công!")
     input("\nNhấn Enter để quay lại menu...")
 
 
 def add_exam_for_student():
-    mssv = input("Nhập MSSV sinh viên: ").strip()
-    sv = find_student_by_mssv(mssv)
-
-    if not sv:
-        print("❌ Không tìm thấy sinh viên!")
-        input("\nNhấn Enter để quay lại menu...")
+    if not students:
+        print("\nDanh sách sinh viên đang trống!")
+        input("Nhấn Enter để quay lại menu...")
         return
 
-    print(f"\nSinh viên: {sv.get('name', 'N/A')}")
-    print("--- Nhập lịch thi ---")
+    # 🔥 HIỆN BẢNG DANH SÁCH ĐỂ LỰA CHỌN
+    show_students_table()
+    
+    print("\n0. Quay lại menu")
+    choice = input("Chọn STT sinh viên cần thêm lịch thi: ").strip()
+
+    if choice == "0": return
+    if not choice.isdigit() or int(choice) < 1 or int(choice) > len(students):
+        print("❌ Lựa chọn không hợp lệ!")
+        return
+
+    # Lấy sinh viên dựa trên STT
+    sv = students[int(choice) - 1]
+
+    print(f"\n--- Đang nhập lịch thi cho: {sv.get('name')} (MSSV: {sv.get('mssv')}) ---")
 
     day = input("Thứ (VD: Thứ 6): ").strip()
     subject = input("Môn thi: ").strip()
     room = input("Phòng thi: ").strip()
     time = input("Thời gian thi (VD: 13h30 - 15h30): ").strip()
 
-    if not day or not subject or not room or not time:
+    if not (day and subject and room and time):
         print("⚠️ Không được bỏ trống thông tin!")
-        input("\nNhấn Enter để quay lại menu...")
         return
 
     sv["exam"] = {
@@ -272,8 +290,9 @@ def add_exam_for_student():
         "room": room,
         "time": time
     }
+    save_students_to_file() # Nhớ lưu lại file sau khi sửa
 
-    print("✅ Đã thêm / cập nhật lịch thi thành công!")
+    print("✅ Đã cập nhật lịch thi thành công!")
     input("\nNhấn Enter để quay lại menu...")
 def delete_student_by_mssv():
     if not students:
@@ -281,33 +300,39 @@ def delete_student_by_mssv():
         input("Nhấn Enter để quay lại menu...")
         return
 
-    # Hiển thị danh sách sinh viên
+    # 1. Hiển thị bảng để người dùng dễ nhìn
     show_students_table()
 
-    mssv = input("\nNhập MSSV sinh viên cần xóa (0 để quay lại): ").strip()
-    if mssv == "0":
+    # 2. Cho phép chọn theo STT để tránh gõ sai MSSV dài
+    choice = input("\nNhập STT sinh viên cần xóa (0 để hủy): ").strip()
+    
+    if choice == "0":
         return
 
-    sv = find_student_by_mssv(mssv)
-    if not sv:
-        print("❌ Không tìm thấy sinh viên với MSSV này!")
-        input("Nhấn Enter để quay lại menu...")
+    if not choice.isdigit() or int(choice) < 1 or int(choice) > len(students):
+        print("❌ STT không hợp lệ!")
+        input("Nhấn Enter để tiếp tục...")
         return
 
-    # Xác nhận xóa
-    confirm = input(f"⚠ Bạn có chắc muốn xóa sinh viên {sv['name']} (MSSV: {sv['mssv']})? (y/n): ").strip().lower()
-    if confirm != "y":
-        print("❌ Hủy xóa sinh viên.")
-        input("Nhấn Enter để quay lại menu...")
-        return
+    index = int(choice) - 1
+    sv = students[index]
 
-    # Xóa sinh viên khỏi danh sách
-    students.remove(sv)
-    save_students_to_file()
-
-    print(f"✅ Đã xóa sinh viên {sv['name']} (MSSV: {sv['mssv']}) khỏi hệ thống!")
+    # 3. Xác nhận trước khi xóa
+    confirm = input(f"⚠️ Bạn có chắc muốn xóa vĩnh viễn sinh viên: {sv['name']} (MSSV: {sv['mssv']})? (y/n): ").strip().lower()
+    
+    if confirm == "y":
+        # Xóa khỏi danh sách trong bộ nhớ RAM
+        removed_name = sv['name']
+        students.pop(index) 
+        
+        # 🔥 QUAN TRỌNG: Cập nhật ngay lập tức vào file JSON
+        save_students_to_file()
+        
+        print(f"✅ Đã xóa vĩnh viễn sinh viên {removed_name} khỏi hệ thống và file dữ liệu!")
+    else:
+        print("❌ Đã hủy thao tác xóa.")
+    
     input("Nhấn Enter để quay lại menu...")
-
 def find_students_by_name():
     if not students:
         print("\nDanh sách sinh viên đang trống!")

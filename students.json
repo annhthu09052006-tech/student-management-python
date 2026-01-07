@@ -1,8 +1,8 @@
 [
     {
         "name": "Nguyen Van A",
-        "age": "20",
-        "score": "8.5",
+        "age": 20,
+        "score": 8.5,
         "mssv": "111",
         "schedule": {
             "day": "Thứ 3",
@@ -18,27 +18,15 @@
         }
     },
     {
-        "name": "Tran Thi B",
-        "age": "21",
-        "score": "7.8",
-        "mssv": "222"
-    },
-    {
-        "mssv": "123",
-        "name": "Nguyen Van Nam",
-        "age": 18,
-        "score": 8.0
-    },
-    {
         "name": "Luu Thao Ngan",
         "age": 19,
         "score": 9.0,
-        "mssv": "444"
-    },
-    {
-        "mssv": "555",
-        "name": "Pham Nhat Vuong",
-        "age": 20,
-        "score": 9.0
+        "mssv": "444",
+        "schedule": {
+            "day": "Thứ 5",
+            "subject": "CNPM",
+            "room": "TH22",
+            "time": "13h00 - 15h00"
+        }
     }
 ]
