@@ -26,6 +26,7 @@ def view_student_info(student):
     print(f"Họ tên : {student['name']}")
     print(f"Tuổi   : {student['age']}")
     print(f"Điểm TB: {student['score']}")
+    input("\nNhấn Enter để quay lại menu...")
 
 def view_student_score(mssv):
     from student import find_student_by_mssv
@@ -36,6 +37,8 @@ def view_student_score(mssv):
     print("\n====== ĐIỂM TRUNG BÌNH ======")
     print(f"{'MSSV':<10} {'Họ tên':<20} {'Điểm TB':<8}")
     print(f"{sv['mssv']:<10} {sv['name']:<20} {sv['score']:<8}")
+    input("\nNhấn Enter để quay lại menu...")
+
 
 def view_student_schedule(mssv):
     from student import find_student_by_mssv
@@ -49,6 +52,8 @@ def view_student_schedule(mssv):
     print(f"Môn học: {s['subject']}")
     print(f"Phòng: {s['room']}")
     print(f"Thời gian: {s['time']}")
+    input("\nNhấn Enter để quay lại menu...")
+
 
 def view_student_exam(mssv):
     from student import find_student_by_mssv
@@ -62,6 +67,8 @@ def view_student_exam(mssv):
     print(f"Môn thi: {e['subject']}")
     print(f"Phòng: {e['room']}")
     print(f"Thời gian: {e['time']}")
+    input("\nNhấn Enter để quay lại menu...")
+
 
 
 

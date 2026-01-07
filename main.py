@@ -4,7 +4,8 @@ from student import (
     add_student, view_students, sort_students,
     save_students_to_file, load_students_from_file,
     edit_student_by_mssv,find_student_by_mssv,
-    add_schedule_for_student, add_exam_for_student
+    add_schedule_for_student, add_exam_for_student,
+    delete_student_by_mssv, find_students_by_name
 )
 from Add_student import (
     view_student_info, view_student_score, 
@@ -35,6 +36,10 @@ def teacher_menu():
 
         elif choice == "3":
             edit_student_by_mssv()
+        elif choice == "4":
+            delete_student_by_mssv()
+        elif choice == "5":
+            find_students_by_name()
 
         elif choice == "6":
             sort_students()
