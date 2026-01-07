@@ -1,6 +1,8 @@
 from account import login, register_account
 
 current_user = None
+current_student_mssv = None
+
 
 def require_login():
     global current_user
@@ -36,4 +38,4 @@ def is_student():
     return current_user and current_user["role"] == "Sinh viên"
 def logout():
     global current_user
-    current_user = None
+    current_user = None 
