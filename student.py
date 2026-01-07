@@ -175,6 +175,20 @@ def save_students_to_file():
     with open(FILE_NAME, "w", encoding="utf-8") as f:
         json.dump(students, f, ensure_ascii=False, indent=4)
 
+def load_students_from_file():
+    global students
+    if os.path.exists(FILE_NAME):
+        try:
+            with open(FILE_NAME, "r", encoding="utf-8") as f:
+                students = json.load(f)
+        except json.JSONDecodeError:
+            students = []
+    else:
+        students = []
+
+def save_students_to_file():
+    with open(FILE_NAME, "w", encoding="utf-8") as f:
+        json.dump(students, f, ensure_ascii=False, indent=4)
 
 def find_student_by_mssv(mssv):
     for sv in students:
@@ -188,7 +202,6 @@ def get_current_student():
 
     mssv = current_user["username"]  # username = MSSV
     return find_student_by_mssv(mssv)
-
 
 def add_schedule_for_student():
     mssv = input("Nhập MSSV sinh viên: ").strip()

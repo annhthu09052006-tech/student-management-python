@@ -1,6 +1,7 @@
 import json
 import os
 from auth import current_user
+FILE_NAME = "students.json"
 
 
 students = []

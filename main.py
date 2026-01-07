@@ -8,7 +8,13 @@ from student import (
 )
 from Add_student import (
     view_student_info, view_student_score, 
-    view_student_schedule, view_student_exam)
+    view_student_schedule, view_student_exam,
+    find_student_by_mssv
+    )
+from account import change_password
+from auth import logout
+import auth
+
 from account import change_password
 from account import load_accounts
 from auth import require_login, is_teacher, is_student, logout
@@ -41,6 +47,11 @@ def teacher_menu():
             load_students_from_file()
             print("✓ Đã tải dữ liệu từ file")
             input("\nNhấn Enter để quay lại menu...")
+        elif choice == "9":
+            change_password(auth.current_user)
+            logout()
+            break
+
         elif choice == "10":
             add_schedule_for_student()
 
@@ -56,13 +67,12 @@ def teacher_menu():
             print("❌ Lựa chọn không hợp lệ!")
 
 def student_menu():
-    global current_student_mssv
+    mssv = auth.current_user["username"]  # ← CHUẨN, KHÔNG LỖI
 
-    # 🔹 Nhập MSSV một lần
-    current_student_mssv = input("Nhập mã sinh viên của bạn: ").strip()
-
-    if not find_student_by_mssv(current_student_mssv):
-        print("❌ Không tìm thấy sinh viên!")
+    sv = find_student_by_mssv(mssv)
+    if not sv:
+        print("❌ Không tìm thấy thông tin sinh viên!")
+        logout()
         return
 
     while True:
@@ -76,18 +86,19 @@ def student_menu():
         choice = input("Chọn: ").strip()
 
         if choice == "1":
-            view_student_info(current_student_mssv)
+            view_student_info(mssv)
         elif choice == "2":
-            view_student_score(current_student_mssv)
+            view_student_score(mssv)
         elif choice == "3":
-            view_student_schedule(current_student_mssv)
+            view_student_schedule(mssv)
         elif choice == "4":
-            view_student_exam(current_student_mssv)
+            view_student_exam(mssv)
         elif choice == "0":
             logout()
+            print("👋 Đã đăng xuất sinh viên!")
             break
         else:
-            print("Lựa chọn không hợp lệ!")
+            print("❌ Lựa chọn không hợp lệ!")
 
 
 def main():

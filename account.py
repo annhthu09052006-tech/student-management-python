@@ -29,33 +29,40 @@ def save_accounts():
 # ==============================
 def register_account():
     print("\n--- Tạo tài khoản mới ---")
-    username = input("Tên đăng nhập: ").strip()
-
-    # kiểm tra trùng
-    for acc in accounts:
-        if acc["username"] == username:
-            print("✘ Tên đăng nhập đã tồn tại!")
-            return
-
-    password = input("Mật khẩu: ").strip()
     role = input("Vai trò (sv/gv): ").strip().lower()
 
     if role == "sv":
         role = "Sinh viên"
+        username = input("Nhập MSSV (dùng để đăng nhập): ").strip()
+
+        from student import find_student_by_mssv
+        if not find_student_by_mssv(username):
+            print("❌ MSSV không tồn tại! Hãy thêm sinh viên trước.")
+            return
+
     elif role == "gv":
         role = "Giảng viên"
+        username = input("Tên đăng nhập giảng viên: ").strip()
     else:
-        print("✘ Vai trò không hợp lệ!")
+        print("❌ Vai trò không hợp lệ!")
         return
 
+    for acc in accounts:
+        if acc["username"] == username:
+            print("❌ Tài khoản đã tồn tại!")
+            return
+
+    password = input("Mật khẩu: ").strip()
+
     accounts.append({
-        "username": username,
+        "username": username,   # ← MSSV
         "password": password,
         "role": role
     })
 
     save_accounts()
-    print("✓ Tạo tài khoản thành công!")
+    print("✅ Tạo tài khoản thành công!")
+
 # ==============================
 # ĐĂNG NHẬP
 # ==============================
@@ -71,8 +78,9 @@ def login():
 
     print("✘ Sai tên đăng nhập hoặc mật khẩu!")
     return None
-def change_password():
+def change_password(current_user):
     if not current_user:
+        print("⚠ Chưa đăng nhập!")
         return
 
     old_pass = input("Mật khẩu cũ: ").strip()
@@ -83,5 +91,6 @@ def change_password():
     new_pass = input("Mật khẩu mới: ").strip()
     current_user["password"] = new_pass
     save_accounts()
-    print("✓ Đổi mật khẩu thành công! Vui lòng đăng nhập lại.")
-    logout()
+
+    print("✅ Đổi mật khẩu thành công! Vui lòng đăng nhập lại.")
+
