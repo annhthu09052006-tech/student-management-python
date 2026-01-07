@@ -10,7 +10,7 @@ def show_menu():
     print("6. Sắp xếp sinh viên theo tên")
     print("7. Lưu danh sách sinh viên vào file")
     print("8. Tải danh sách sinh viên từ file")
-    print("9. Cập nhật thông tin sinh viên")
+    print("9. Đổi mật khẩu")
     print("10. cập nhật lịch học cho sinh viên")
     print("11. cập nhật lịch thi cho sinh viên")
     print("0. Thoát")
