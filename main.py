@@ -4,7 +4,8 @@ from student import (
     add_student, view_students, sort_students,
     save_students_to_file, load_students_from_file,
     edit_student_by_mssv,find_student_by_mssv,
-    add_schedule_for_student, add_exam_for_student
+    add_schedule_for_student, add_exam_for_student,
+    delete_student_by_mssv, find_students_by_name
 )
 from Add_student import (
     view_student_info, view_student_score, 
@@ -19,6 +20,7 @@ from account import change_password
 from account import load_accounts
 from auth import require_login, is_teacher, is_student, logout
 
+current_student = None
 
 def teacher_menu():
     while True:
@@ -34,6 +36,10 @@ def teacher_menu():
 
         elif choice == "3":
             edit_student_by_mssv()
+        elif choice == "4":
+            delete_student_by_mssv()
+        elif choice == "5":
+            find_students_by_name()
 
         elif choice == "6":
             sort_students()
@@ -66,19 +72,11 @@ def teacher_menu():
         else:
             print("❌ Lựa chọn không hợp lệ!")
 
-def student_menu():
-    mssv = auth.current_user["username"]  # ← CHUẨN, KHÔNG LỖI
-
-    sv = find_student_by_mssv(mssv)
-    if not sv:
-        print("❌ Không tìm thấy thông tin sinh viên!")
-        logout()
-        return
-
+def student_menu(student):
     while True:
         print("\n===== MENU SINH VIÊN =====")
         print("1. Xem thông tin cá nhân")
-        print("2. Xem điểm trung bình")
+        print("2. Xem điểm")
         print("3. Xem lịch học")
         print("4. Xem lịch thi")
         print("0. Đăng xuất")
@@ -86,19 +84,21 @@ def student_menu():
         choice = input("Chọn: ").strip()
 
         if choice == "1":
-            view_student_info(mssv)
+            view_student_info(student)
         elif choice == "2":
-            view_student_score(mssv)
+            view_student_score(student["mssv"])
         elif choice == "3":
-            view_student_schedule(mssv)
+            view_student_schedule(student["mssv"])
         elif choice == "4":
-            view_student_exam(mssv)
+            view_student_exam(student["mssv"])
         elif choice == "0":
+            from auth import logout
             logout()
             print("👋 Đã đăng xuất sinh viên!")
             break
         else:
             print("❌ Lựa chọn không hợp lệ!")
+
 
 
 def main():
@@ -111,8 +111,14 @@ def main():
         if is_teacher():
             teacher_menu()
         elif is_student():
-            student_menu()
+            mssv = input("Nhập MSSV của bạn: ").strip()
+            student = find_student_by_mssv(mssv)
 
+            if not student:
+                print("❌ Không tìm thấy thông tin sinh viên!")
+                logout()
+                continue   # quay về menu đăng nhập
+            student_menu(student)
 
 if __name__ == "__main__":
     main()

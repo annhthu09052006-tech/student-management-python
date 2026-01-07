@@ -181,10 +181,17 @@ def load_students_from_file():
         try:
             with open(FILE_NAME, "r", encoding="utf-8") as f:
                 students = json.load(f)
+                # Ép kiểu cho đúng
+                for sv in students:
+                    if 'age' in sv:
+                        sv['age'] = int(sv['age'])
+                    if 'score' in sv:
+                        sv['score'] = float(sv['score'])
         except json.JSONDecodeError:
             students = []
     else:
         students = []
+
 
 def save_students_to_file():
     with open(FILE_NAME, "w", encoding="utf-8") as f:
@@ -231,6 +238,7 @@ def add_schedule_for_student():
         "room": room,
         "time": time
     }
+    save_students_to_file()
 
     print("✅ Đã thêm / cập nhật lịch học thành công!")
     input("\nNhấn Enter để quay lại menu...")
@@ -267,4 +275,70 @@ def add_exam_for_student():
 
     print("✅ Đã thêm / cập nhật lịch thi thành công!")
     input("\nNhấn Enter để quay lại menu...")
+def delete_student_by_mssv():
+    if not students:
+        print("\nDanh sách sinh viên đang trống!")
+        input("Nhấn Enter để quay lại menu...")
+        return
 
+    # Hiển thị danh sách sinh viên
+    show_students_table()
+
+    mssv = input("\nNhập MSSV sinh viên cần xóa (0 để quay lại): ").strip()
+    if mssv == "0":
+        return
+
+    sv = find_student_by_mssv(mssv)
+    if not sv:
+        print("❌ Không tìm thấy sinh viên với MSSV này!")
+        input("Nhấn Enter để quay lại menu...")
+        return
+
+    # Xác nhận xóa
+    confirm = input(f"⚠ Bạn có chắc muốn xóa sinh viên {sv['name']} (MSSV: {sv['mssv']})? (y/n): ").strip().lower()
+    if confirm != "y":
+        print("❌ Hủy xóa sinh viên.")
+        input("Nhấn Enter để quay lại menu...")
+        return
+
+    # Xóa sinh viên khỏi danh sách
+    students.remove(sv)
+    save_students_to_file()
+
+    print(f"✅ Đã xóa sinh viên {sv['name']} (MSSV: {sv['mssv']}) khỏi hệ thống!")
+    input("Nhấn Enter để quay lại menu...")
+
+def find_students_by_name():
+    if not students:
+        print("\nDanh sách sinh viên đang trống!")
+        input("Nhấn Enter để quay lại menu...")
+        return
+
+    name_query = input("Nhập tên sinh viên cần tìm: ").strip().lower()
+    if not name_query:
+        print("⚠ Bạn chưa nhập tên sinh viên!")
+        return
+
+    # Tìm sinh viên có tên chứa từ khóa (không phân biệt hoa/thường)
+    matched_students = [sv for sv in students if name_query in sv.get("name", "").lower()]
+
+    if not matched_students:
+        print("❌ Không tìm thấy sinh viên nào phù hợp!")
+        input("Nhấn Enter để quay lại menu...")
+        return
+
+    # Hiển thị danh sách sinh viên tìm được
+    print("\n--- DANH SÁCH SINH VIÊN TÌM THẤY ---")
+    print(f"{'STT':<5} {'MSSV':<10} {'Họ tên':<20} {'Tuổi':<6} {'Điểm TB':<8}")
+    print("-" * 55)
+
+    for i, sv in enumerate(matched_students, 1):
+        print(
+            f"{i:<5} "
+            f"{sv.get('mssv','N/A'):<10} "
+            f"{sv.get('name','N/A'):<20} "
+            f"{sv.get('age','-'):<6} "
+            f"{sv.get('score','-'):<8}"
+        )
+
+    input("\nNhấn Enter để quay lại menu...")
