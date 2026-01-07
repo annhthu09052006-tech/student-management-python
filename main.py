@@ -1,13 +1,13 @@
 
 from Menu import show_menu
-from student import (
+from teacher import (
     add_student, view_students, sort_students,
     save_students_to_file, load_students_from_file,
     edit_student_by_mssv,find_student_by_mssv,
     add_schedule_for_student, add_exam_for_student,
     delete_student_by_mssv, find_students_by_name
 )
-from Add_student import (
+from student import (
                         
     view_student_info, view_student_score, 
     view_student_schedule, view_student_exam,
@@ -77,7 +77,7 @@ def student_menu(student):
     while True:
         print("\n===== MENU SINH VIÊN =====")
         print("1. Xem thông tin cá nhân")
-        print("2. Xem điểm")
+        print("2. Xem điểm trung bình")
         print("3. Xem lịch học")
         print("4. Xem lịch thi")
         print("0. Đăng xuất")
