@@ -3,11 +3,12 @@ from Menu import show_menu
 from student import (
     add_student, view_students, sort_students,
     save_students_to_file, load_students_from_file,
-    edit_student_by_mssv, find_student_by_mssv, view_student_info, 
-    view_student_score, view_student_schedule,
-    view_student_exam, find_student_by_mssv,
+    edit_student_by_mssv,find_student_by_mssv,
     add_schedule_for_student, add_exam_for_student
 )
+from Add_student import (
+    view_student_info, view_student_score, 
+    view_student_schedule, view_student_exam)
 from account import change_password
 from account import load_accounts
 from auth import require_login, is_teacher, is_student, logout
